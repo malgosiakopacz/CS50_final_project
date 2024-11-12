@@ -1,0 +1,123 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Body Fat Prediction
+{% endblock %}
+
+{% block main %}
+    <div class="row">
+        <!-- Left Column-->
+        <div class="column">
+            <h1>Why is Knowing Your Body Fat Percentage Important?</h1>
+            <p>Body fat percentage is a crucial indicator of overall health. It provides a more accurate assessment of fitness levels than weight alone and offers insights into the balance between muscle and fat in your body. Monitoring body fat can guide healthy lifestyle choices, assist in setting fitness goals, and help reduce the risk of health conditions such as heart disease, diabetes, and obesity.</p>
+            <br>
+            <h1>How is Body Fat Measured or Estimated?</h1>
+            <p>Body fat can be estimated using formulas based on various body measurements. One common method involves using circumference measurements (such as waist, neck, and hips) along with height, weight, and age. However, this method is not highly accurate.</p>
+            <p>While there are several methods to measure body fat, many of them can be expensive, require specialized equipment, and may involve exposure to radiation. <strong>Hydrostatic Weighing (Underwater Weighing)</strong> is widely regarded as the gold standard for measuring body fat. This method measures body density by comparing an individual's weight in air to their weight underwater, providing accurate results. However, it requires specialized equipment and can be uncomfortable, which limits its widespread use.</p>
+            <p>Unlike other websites that use different formulas to <strong>estimate</strong> body fat percentage based on circumferences, our platform <strong>predicts</strong> this value using <strong>machine learning models</strong> trained on real measurements from Hydrostatic Weighing. Please note that our predictions are currently available FOR MEN ONLY, as the model was developed using a <a href="https://www.kaggle.com/datasets/fedesoriano/body-fat-prediction-dataset" target="_blank">data set collected exclusively from men</a>.</p>
+            <br>
+            <h1>Is the model accurate?</h1>
+            <p>The predictions provided by this model are estimates and should not be considered absolute facts. While we strive for accuracy, the model relies on patterns from a limited dataset and may not account for all individual factors. Please interpret the results as approximate rather than definitive.</p>
+            <br>
+            <h1>What information do you need to provide?</h1>
+            <p>The accuracy of the prediction depends on the level of information you provide in the form below. Each additional point enhances the accuracy of the prediction:</p>
+            <ol class="inside">
+                <li>Height and Weight: This information calculates your BMI and initiates a machine learning prediction of lower accuracy.</li>
+                <li>Age and Chest and Abdomen Circumferences: These are the critical data points that significantly improve prediction accuracy.</li>
+                <li>Hip and Thigh Circumferences: Including these measurements further enhances the prediction.</li>
+                <li>Neck, Knee, Ankle, Biceps, Forearm, and Wrist Circumferences: Providing these additional measurements yields the most accurate prediction.</li>
+            </ol>
+        </div>
+
+        <!-- Right Column (Form) -->
+        <div class="column">
+            <br>
+            <h4>Instructions:</h4>
+            <ol class="inside">
+                <li>All the fields in Basic box are necessary</li>
+                <li>Each next colour box gives better prediction</li>
+                <li>Each colour box must be filled completely, otherwise only data from the last full box will be used</li>
+            </ol>
+            <br>
+            <form action="/" method="post">
+                <h3>Select units</h3>
+                <div>
+                    <input type="radio" id="metric" name="units" value="metric" {% if form_data['units'] == 'metric' %}checked{% endif %}>
+                    <label for="metric">Metric [cm/kg]</label><br>
+                    <input type="radio" id="imperial" name="units" value="imperial" {% if form_data['units'] == 'imperial' %}checked{% endif %}>
+                    <label for="imperial">Imperial [inch/pound]</label><br>
+                </div>
+                <br>
+                <div id="div1">
+                    <h3>Basic</h3>
+                    <p>
+                        <label for="Height">Height [cm/inch]</label>
+                        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="Height" name="height" placeholder="Height" type="text" value="{{ form_data['height'] }}">
+                    </p>
+                    <p>
+                        <label for="Weight">Weight [kg/pound]</label>
+                        <input class="form-control mx-auto w-auto" name="weight" placeholder="Weight" type="text" value="{{ form_data['weight'] }}">
+                    </p>
+                    <div class="mb-3">
+                        <label for="Age">Age</label>
+                        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="Age" name="age" placeholder="Age" type="text" value="{{ form_data['age'] }}">
+                    </div>
+                </div>
+                <br>
+                <div id="div2">
+                    <h3>Good</h2>
+                    <div class="mb-3">
+                        <label for="Chest">Chest [cm/inch]</label>
+                        <input class="form-control mx-auto w-auto" name="chest" placeholder="Chest" type="text" value="{{ form_data['chest'] }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Abdomen">Abdomen [cm/inch]</label>
+                        <input class="form-control mx-auto w-auto" name="abdomen" placeholder="Abdomen" type="text" value="{{ form_data['abdomen'] }}">
+                    </div>
+                </div>
+                <br>
+                <div id="div3">
+                    <h3>Better</h3>
+                    <div class="mb-3">
+                        <label for="Hip">Hip [cm/inch]</label>
+                        <input class="form-control mx-auto w-auto" name="hip" placeholder="Hip" type="text" value="{{ form_data['hip'] }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Thigh">Thigh [cm/inch]</label>
+                        <input class="form-control mx-auto w-auto" name="thigh" placeholder="Thigh" type="text" value="{{ form_data['thigh'] }}">
+                    </div>
+                </div>
+                <br>
+                <div id="div4">
+                    <h3>Best</h3>
+                    <div class="mb-3">
+                        <label for="Neck">Neck [cm/inch]</label>
+                        <input class="form-control mx-auto w-auto" name="neck" placeholder="Neck" type="text" value="{{ form_data['neck'] }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Knee">Knee [cm/inch]</label>
+                        <input class="form-control mx-auto w-auto" name="knee" placeholder="Knee" type="text" value="{{ form_data['knee'] }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Ankle">Ankle [cm/inch]</label>
+                        <input class="form-control mx-auto w-auto" name="ankle" placeholder="Ankle" type="text" value="{{ form_data['ankle'] }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Biceps">Biceps [cm/inch]</label>
+                        <input class="form-control mx-auto w-auto" name="biceps" placeholder="Biceps" type="text" value="{{ form_data['biceps'] }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Forearm">Forearm [cm/inch]</label>
+                        <input class="form-control mx-auto w-auto" name="forearm" placeholder="Forearm" type="text" value="{{ form_data['forearm'] }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Wrist">Wrist [cm/inch]</label>
+                        <input class="form-control mx-auto w-auto" name="wrist" placeholder="Wrist" type="text" value="{{ form_data['wrist'] }}">
+                    </div>
+                </div>
+                <br>
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

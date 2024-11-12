@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    More info
+{% endblock %}
+
+{% block main %}
+<h1>How were the models made?</h1>
+<p>The model was trained on the <a href="https://www.kaggle.com/datasets/fedesoriano/body-fat-prediction-dataset" target="_blank">Body Fat Prediction Dataset</a>, which includes estimates of body fat percentage determined by underwater weighing and various body measurements for 252 men. The data were carefully reviewed for outliers (for instance, an unusually low height of 70 cm was removed) and prepared for analysis. The model was initially trained to predict body density, as this was directly measured in the dataset, alongside other data points like body circumference and weight. Once body density was predicted, body fat percentage was then calculated using the Siri equation, which relates body density to fat percentage. Multiple machine learning algorithms were tested, and the best-performing model was selected for each data input type: linear regression was chosen for the Basic, Good, and Better inputs, while Bayesian ridge regression was used for the Best input. When you enter data in the form, it is passed to the appropriate model to calculate the most likely body fat percentage.</p>
+<br>
+<h1>Models' performance</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Model</th>
+            <th>Algorithm</th>
+            <th>R<sup>2</sup> Score</th>
+            <th>RMSE</th>
+            <th>MAE</th>
+        </tr>
+    </thead>
+    <tbody>
+            <tr>
+                <td>Basic</td>
+                <td>Linear Regression/td>
+                <td>0.5645</td>
+                <td>0.0123</td>
+                <td>0.0100</td>
+            </tr>
+            <tr>
+                <td>Good</td>
+                <td>Linear Regression/td>
+                <td>0.6564</td>
+                <td>0.01097</td>
+                <td>0.00905</td>
+            </tr>
+            <tr>
+                <td>Better</td>
+                <td>Linear Regression/td>
+                <td>0.6556</td>
+                <td>0.01098</td>
+                <td>0.00907</td>
+            </tr>
+            <tr>
+                <td>Best</td>
+                <td>Bayesian Ridge/td>
+                <td>0.6572</td>
+                <td>0.01096</td>
+                <td>0.00920</td>
+            </tr>
+    </tbody>
+</table>
+<br>
+<p>The three key performance metrics—R² score, Root Mean Squared Error (RMSE), and Mean Absolute Error (MAE)—show the most significant improvement between the Basic and Good models. This is expected, as the Basic model relies heavily on BMI (which is derived from height and weight). However, BMI can be misleading, particularly for athletes, who often have a high BMI but a low body fat percentage. Age, while influencing body fat percentage, has a lower correlation compared to factors like overall fitness, which has a greater impact on body composition. Including chest and abdomen circumference measurements in the Good model provides more meaningful data, significantly improving prediction accuracy. While adding more body circumferences improves the model’s performance, their impact is less pronounced, though they are particularly useful for refining predictions at extreme body fat levels.</p>
+<p>Although the models provide helpful estimates, it’s important to acknowledge that they are not perfect. There remains room for improvement, particularly in accurately predicting extreme body fat percentages. Future enhancements could include adjusting the current algorithms, exploring more advanced techniques, training the models on larger and more diverse datasets, or incorporating additional measurable factors that impact body composition.</p>
+{% endblock %}

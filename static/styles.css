@@ -1,0 +1,90 @@
+/* Size for brand */
+nav .navbar-brand
+{
+    font-size: xx-large;
+}
+
+/* Colors for brand */
+nav .navbar-brand .blue
+{
+    color: #537fbe;
+}
+nav .navbar-brand .red
+{
+    color: #ea433b;
+}
+nav .navbar-brand .yellow
+{
+    color: #f5b82e;
+}
+nav .navbar-brand .green
+{
+    color: #2e944b;
+}
+
+header {
+    margin: 5px;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 8px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:hover {background-color: #ddd;}
+
+p.bold {
+    font-weight: bold;
+}
+
+p.centered {
+    text-align: center;
+}
+
+ol.inside {
+    list-style-position: inside;
+}
+
+input[type=number], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+  /* Create two equal columns that float next to each other */
+.column {
+    float: left;
+    width: 50%;
+    padding: 30px;
+}
+
+  /* Clear floats after the columns */
+.row::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+  /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width:1000px) {
+    .column {
+      width: 100%;
+    }
+  }
+
+#div1 {background-color: #cedcf0;border-radius: 8px;padding: 5px;}
+#div2 {background-color: #ecc9c8;border-radius: 8px;padding: 5px;}
+#div3 {background-color: #f5e5bf;border-radius: 8px;padding: 5px;}
+#div4 {background-color: #b9d7c1;border-radius: 8px;padding: 5px;}
+
+#div5 {background-color: #ddd; border-radius: 8px;padding: 5px;}
+
