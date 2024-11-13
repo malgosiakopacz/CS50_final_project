@@ -6,6 +6,7 @@ import pandas as pd
 from helpers import apology
 
 import joblib
+import os
 
 # ensure that Flask reads environment variables from my .env or .flaskenv
 from dotenv import load_dotenv
@@ -27,17 +28,28 @@ def after_request(response):
     response.headers["Pragma"] = "no-cache"
     return response
 
+# Set the path to the `.joblib` file relative to the location of `app.py`
+file_path_model_basic = os.path.join(os.path.dirname(__file__), 'body_fat', 'body_density_basic.joblib')
+file_path_model_extra1 = os.path.join(os.path.dirname(__file__), 'body_fat', 'body_density_extra1.joblib')
+file_path_model_extra2 = os.path.join(os.path.dirname(__file__), 'body_fat', 'body_density_extra2.joblib')
+file_path_model_extra3 = os.path.join(os.path.dirname(__file__), 'body_fat', 'body_density_extra3.joblib')
+
+file_path_trans_basic = os.path.join(os.path.dirname(__file__), 'body_fat', 'trans_basic.joblib')
+file_path_trans_extra1 = os.path.join(os.path.dirname(__file__), 'body_fat', 'trans_extra1.joblib')
+file_path_trans_extra2 = os.path.join(os.path.dirname(__file__), 'body_fat', 'trans_extra2.joblib')
+file_path_trans_extra3 = os.path.join(os.path.dirname(__file__), 'body_fat', 'trans_extra3.joblib')
+
 # Load pre-trained models
-model_basic = joblib.load('CS50_final_project/body_fat/body_density_basic.joblib')
-model_extra1 = joblib.load('CS50_final_project/body_fat/body_density_extra1.joblib')
-model_extra2 = joblib.load('CS50_final_project/body_fat/body_density_extra2.joblib')
-model_extra3 = joblib.load('CS50_final_project/body_fat/body_density_extra3.joblib')
+model_basic = joblib.load(file_path_model_basic)
+model_extra1 = joblib.load(file_path_model_extra1)
+model_extra2 = joblib.load(file_path_model_extra2)
+model_extra3 = joblib.load(file_path_model_extra3)
 
 # Load pre-trained power transformers
-trans_basic = joblib.load('CS50_final_project/body_fat/trans_basic.joblib')
-trans_extra1 = joblib.load('CS50_final_project/body_fat/trans_extra1.joblib')
-trans_extra2 = joblib.load('CS50_final_project/body_fat/trans_extra2.joblib')
-trans_extra3 = joblib.load('CS50_final_project/body_fat/trans_extra3.joblib')
+trans_basic = joblib.load(file_path_trans_basic)
+trans_extra1 = joblib.load(file_path_trans_extra1)
+trans_extra2 = joblib.load(file_path_trans_extra2)
+trans_extra3 = joblib.load(file_path_trans_extra3)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
