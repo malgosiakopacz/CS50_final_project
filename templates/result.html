@@ -10,17 +10,17 @@
     <br>
     <h2>Your <strong>BMI: {{ BMI }}</strong></h2>
     <br>
-    <h2>Your <strong>predicted Body Fat: {{ BFP }}% +/- 4.9%</strong></h2>
+    <h2>Your <strong>predicted Body Fat: {{ BFP }}% &#8723; {{ std }}%</strong></h2>
     <br>
     <p>{{ message2 }}</p>
 </div>
 <br>
-<h3>What does your result mean?</h3>
+<h3>What Does Your Result Mean?</h3>
 <div class="row">
     <!-- Left Column-->
     <div class="column">
-        <h4>BMI</h4>
-        <p>Body Mass Index (BMI) is a simple calculation used to assess whether a person’s weight is in a healthy range relative to their height. It’s calculated by dividing a person’s weight in kilograms by the square of their height in meters (kg/m²). BMI is a quick and widely-used tool for identifying whether someone <strong>might be</strong> underweight, at a healthy weight, overweight, or obese, which can help gauge potential health risks. However, BMI doesn’t directly measure body fat, so it’s often used alongside other assessments for a fuller picture of an individual’s health.</p>
+        <h4>BMI (Body Mass Index)</h4>
+        <p>Body Mass Index (BMI) is a simple calculation used to assess whether a person’s weight is in a healthy range relative to their height. It’s calculated by dividing a person’s weight in kilograms by the square of their height in meters (kg/m²). BMI is a quick and widely-used tool for identifying whether someone <strong>might be</strong> underweight, at a healthy weight, overweight, or obese, which can help in evaluating potential health risks. However, BMI doesn’t directly measure body fat, so it’s often used alongside other assessments for a fuller picture of an individual’s health.</p>
         <br>
         <h5>BMI classification</h5>
         <table>
@@ -67,13 +67,24 @@
         <p>Source: <a href="https://www.nhlbi.nih.gov/health/educational/lose_wt/BMI/bmi_dis.htm" target="_blank">National Institute of Health</a></p>
         <br>
         <h5>Limitations of BMI</h5>
-        <p>While BMI is a useful tool for estimating healthy weight ranges, it has limitations. Because it only considers weight and height, BMI doesn’t account for individual differences in muscle mass, bone density, or body composition. For example, athletes or muscular individuals may have higher BMIs without having excess body fat, while older adults with lower muscle mass may have a normal BMI but higher body fat levels. As a result, BMI should be considered alongside other measures, like body fat percentage, to provide a more complete picture of an individual’s health.</p>
+        <p>While BMI is a useful tool for estimating healthy weight ranges, it has several limitations. Because it only considers weight and height, BMI does not account for individual differences in muscle mass, bone density, or body composition. For example:</p>
+        <ol class="inside">
+            <ul>Athletes or muscular individuals may have higher BMIs without having excess body fat.</ul>
+            <ul>Older adults with lower muscle mass may have a normal BMI but higher body fat levels.</ul>
+        </ol>
+        <p>As a result, BMI should be considered in conjuction with other measures, such as body fat percentage, to provide a more comprehensive assessment of an individual’s health.</p>
     </div>
 
     <!-- Right Column (Form) -->
     <div class="column">
         <h4>Body Fat</h4>
-        <p>Body fat is the amount of fat stored in the body as a percentage of total body weight. It serves essential functions, including energy storage, protection of organs, and temperature regulation. However, too much or too little body fat can affect health. High body fat levels are linked to conditions like cardiovascular disease, diabetes, and certain cancers, while too little can lead to nutrient deficiencies and weakened immunity. Unlike BMI, body fat measurement gives a clearer picture of health by differentiating fat from lean mass.</p>
+        <p>Body fat refers to the amount of fat stored in the body as a percentage of total body weight. It plays essential roles, including energy storage, organ protection, and temperature regulation.</p>
+        <p>However, having too much or too little body fat can negatively impact health:</p>
+        <ol class="inside">
+            <ul>Excess body fat is associated with conditions like cardiovascular disease, diabetes, and certain cancers.</ul>
+            <ul>Insufficient body fat can result in nutrient deficiencies and weakened immunity.</ul>
+        </ol>
+        <p>Unlike BMI, body fat measurement provides a clearer picture of health by distinguishing fat from lean mass.</p>
         <br>
         <h5>Body Fat Ranges in Men</h5>
         <table>
@@ -108,7 +119,7 @@
         </table>
         <p>Source: <a href="https://www.healthline.com/health/exercise-fitness/ideal-body-fat-percentage#for-men" target="_blank">The American Council on Exercise (ACE)</a></p>
         <br>
-        <h5>Ideal body fat percentages based on age</h5>
+        <h5>Ideal Body Fat Percentages Based on Age</h5>
         <table>
             <thead>
                 <tr>
@@ -133,8 +144,13 @@
         </table>
         <p>Source: <a href="https://www.healthline.com/health/exercise-fitness/ideal-body-fat-percentage#for-men" target="_blank">Beth Israel Lahey Health Winchester Hospital</a></p>
         <br>
-        <h5>Limitations of this prediction</h5>
-        <p>Our prediction model provides an estimate of body fat percentage based on patterns found in a small group of about 250 men. Because of this limited data, the model may be less accurate for individuals with body fat levels that are either very high or very low. For people who are very lean, the model might overestimate their body fat, while for those with higher body fat, it may underestimate. Think of this estimate as a starting point rather than an exact measure, especially if you fall outside the typical range. For a clearer picture of your body fat, consider combining this with other assessments or professional measurements.</p>
+        <h5>Limitations of This Prediction</h5>
+        <p>Our prediction model provides an estimate of body fat percentage based on patterns derived from a small group of approximately 250 men. Due to this limited dataset, the model may be less accurate for individuals with body fat levels that are either very high or very low.</p>
+        <ol class="inside">
+            <ul>For very lean individuals, the model might overestimate their body fat levels.</ul>
+            <ul>For those with higher body fat, it may underestimate.</ul>
+        </ol>
+        <p>Think of this estimate as a baseline rather than an exact measure, especially if you fall outside the typical range. To gain more accurate understanding of your body fat, consider combining this estimate with other assessments or professional measurements.</p>
     </div>
 </div>
 {% endblock %}
