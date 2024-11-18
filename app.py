@@ -155,9 +155,9 @@ def index():
 
             session["message1"] = "The data you provided was sufficient for a prediction using the Basic Model."
             session["message2"] = "The Basic Model is the least accurate, particularly when the predicted body fat percentage is very low or very high. To obtain a more reliable result, please provide your chest and abdomen circumferences."
-            std = 5.5
+            session["std"] = 5.5
             
-            return render_template("result.html", BMI=BMI, BFP=body_perc_basic, message1=session["message1"], message2=session["message2"], std=std)
+            return render_template("result.html", BMI=BMI, BFP=body_perc_basic, message1=session["message1"], message2=session["message2"], std=session["std"])
         
         # If only height, weight, age, chest and abdomen are provided -> show BMI and predict extra1
         if "height" in data and "weight" in data and "age" in data and "chest" in data and "abdomen" in data and not("hip" in data and "thigh" in data):
@@ -193,9 +193,9 @@ def index():
 
             session["message1"] = "The data you provided was sufficient for a prediction using the Good Model."
             session["message2"] = "This model offers a significant improvement compared to the Basic Model. However, for an even more reliable result, please provide your hip and thigh circumferences."
-            std = 4.9
+            session["std"] = 4.9
             
-            return render_template("result.html", BMI=BMI, BFP=body_perc_extra1, message1=session["message1"], message2=session["message2"], std=std)
+            return render_template("result.html", BMI=BMI, BFP=body_perc_extra1, message1=session["message1"], message2=session["message2"], std=session["std"])
         
         # If only height, weight, age, chest, abdomen, hip, and thigh are provided -> show BMI and predict extra2
         if "height" in data and "weight" in data and "age" in data and "chest" in data and "abdomen" in data and "hip" in data and "thigh" in data and not("neck" in data and "knee" in data and "ankle" in data and "biceps" in data and "forearm" in data and "wrist" in data):
@@ -232,9 +232,9 @@ def index():
 
             session["message1"] = "The data you provided was sufficient for a prediction using the Better Model."
             session["message2"] = "This model provides a fairly reliable result. However, for the most accurate and trustworthy outcome—especially if your BMI is very low or very high—please provide the missing data required for the Best Model."
-            std = 4.9
+            session["std"] = 4.9
             
-            return render_template("result.html", BMI=BMI, BFP=body_perc_extra2, message1=session["message1"], message2=session["message2"], std=std)
+            return render_template("result.html", BMI=BMI, BFP=body_perc_extra2, message1=session["message1"], message2=session["message2"], std=session["std"])
         
         # If all data are provided -> show BMI and predict extra3
         all_data_provided = all(data[key] for key in data)
@@ -273,9 +273,9 @@ def index():
 
             session["message1"] = "The data you provided was sufficient for a prediction using the Best Model."
             session["message2"] = ""
-            std = 4.9
+            session["std"] = 4.9
             
-            return render_template("result.html", BMI=BMI, BFP=body_perc_extra3, message1=session["message1"], message2=session["message2"], std=std)
+            return render_template("result.html", BMI=BMI, BFP=body_perc_extra3, message1=session["message1"], message2=session["message2"], std=session["std"])
 
         # Clear session data after successful form submission
         session.clear()
@@ -293,7 +293,7 @@ def result():
     """Show the results and some explanation"""
 
     if session['BMI'] and session['BFP']:
-        return render_template("result.html", BMI=session['BMI'], BFP=session['BFP'], message1=session['message1'], message2=session['message2'])
+        return render_template("result.html", BMI=session['BMI'], BFP=session['BFP'], message1=session['message1'], message2=session['message2'], std=session["std"])
     
     return apology("Fill out the form", 400)
 
