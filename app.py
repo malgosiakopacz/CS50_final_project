@@ -1,5 +1,6 @@
 from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
+from datetime import timedelta
 import numpy as np
 import pandas as pd
 
@@ -18,6 +19,7 @@ app = Flask(__name__)
 # Configure session to use filesystem (instead of signed cookies)
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
+app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(minutes=30)
 Session(app)
 
 @app.after_request
@@ -161,8 +163,6 @@ def index():
         
         # If only height, weight, age, chest and abdomen are provided -> show BMI and predict extra1
         if "height" in data and "weight" in data and "age" in data and "chest" in data and "abdomen" in data and not("hip" in data and "thigh" in data):
-            print("BMI: ", BMI)
-            print("ACratio: ", ACratio)
 
             # Create an input array with age, BMI, and ACratio as features
             input_extra1 = np.array([[data["age"], BMI, ACratio]]) # 2D array format for one sample
@@ -199,9 +199,6 @@ def index():
         
         # If only height, weight, age, chest, abdomen, hip, and thigh are provided -> show BMI and predict extra2
         if "height" in data and "weight" in data and "age" in data and "chest" in data and "abdomen" in data and "hip" in data and "thigh" in data and not("neck" in data and "knee" in data and "ankle" in data and "biceps" in data and "forearm" in data and "wrist" in data):
-            print("BMI: ", BMI)
-            print("ACratio: ", ACratio)
-            print("HTratio: ", HTratio)
 
             # Create an input array with age, BMI, ACratio, and HTratio as features
             input_extra2 = np.array([[data["age"], BMI, ACratio, HTratio]]) # 2D array format for one sample
@@ -240,9 +237,6 @@ def index():
         all_data_provided = all(data[key] for key in data)
 
         if all_data_provided:
-            print("BMI: ", BMI)
-            print("ACratio: ", ACratio)
-            print("HTratio: ", HTratio)
 
             # Create an input array with age, neck, knee, ankle, biceps, forearm, wrist, BMI, ACratio, and HTratio as features
             input_extra3 = np.array([[data["age"], data["neck"], data["knee"], data["ankle"], data["biceps"], data["forearm"], data["wrist"], BMI, ACratio, HTratio]]) # 2D array format for one sample
@@ -277,9 +271,6 @@ def index():
             
             return render_template("result.html", BMI=BMI, BFP=body_perc_extra3, message1=session["message1"], message2=session["message2"], std=session["std"])
 
-        # Clear session data after successful form submission
-        session.clear()
-
         return render_template("layout.html")
     
     # If accessed via GET request, load stored data into the form
@@ -292,9 +283,11 @@ def index():
 def result():
     """Show the results and some explanation"""
 
-    if session['BMI'] and session['BFP']:
-        return render_template("result.html", BMI=session['BMI'], BFP=session['BFP'], message1=session['message1'], message2=session['message2'], std=session["std"])
+    # If session active
+    if all(key in session for key in ["BMI", "BFP", "message1", "message2", "std"]):
+        return render_template("result.html", BMI=session["BMI"], BFP=session['BFP'], message1=session['message1'], message2=session['message2'], std=session["std"])
     
+    # If session inactive
     return apology("Fill out the form", 400)
 
 @app.route("/info")
